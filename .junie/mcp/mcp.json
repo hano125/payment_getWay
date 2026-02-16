@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "C:\\laragon\\bin\\php\\php-8.2.21-Win32-vs16-x64\\php.exe",
+            "args": [
+                "G:\\laravel learn\\payment_getways\\artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
