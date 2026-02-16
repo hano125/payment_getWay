@@ -27,14 +27,14 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @guest
                 <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    {{ __('login') }}
+                    {{ __('Login') }}
                 </x-nav-link>
 
                 <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                    {{ __('register') }}
+                    {{ __('Register') }}
                 </x-nav-link>
                 @endguest
-                
+
                 @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
