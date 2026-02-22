@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    $courses = Course::all();
+    $courses = Course::paginate(20);
     return view('welcome', get_defined_vars());
 })->name('home');
 
