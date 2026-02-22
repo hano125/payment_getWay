@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Course;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -15,6 +17,10 @@ Route::controller(CourseController::class)->group(function () {
     Route::get('courses/{course:slug}', 'show')->name('courses.show');
 });
 
+Route::controller(CartController::class)->group(function () {
+    Route::get('cart', 'index')->name('cart.index');
+    Route::get("add-to-cart/{course:slug}", "addToCart")->name("addToCart");
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

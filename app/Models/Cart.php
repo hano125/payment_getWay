@@ -12,4 +12,9 @@ class Cart extends Model
     {
         return $this->belongsToMany(Course::class, 'cart_create');
     }
+
+    public function cartEmpty()
+    {
+        return $this->courses()->count() === 0;
+    }
 }

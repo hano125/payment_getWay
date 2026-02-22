@@ -23,7 +23,9 @@
 
                                     <div class="mt-auto d-flex align-items-center justify-content-between">
                                         <p class="fw-bold fs-5 mb-0">${{ $course->price }}</p>
-                                        <a href="#" class="btn btn-primary btn-sm px-3">Add to Cart</a>
+                                        <a href="{{ route("addToCart", $course) }}"
+                                            class="btn btn-primary btn-sm px-3">Add to
+                                            Cart</a>
                                     </div>
                                 </div>
                             </div>
