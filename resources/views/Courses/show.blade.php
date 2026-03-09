@@ -14,7 +14,7 @@
                             class="flex-1 min-w-[300px] max-w-[350px] border rounded-lg p-4 shadow flex flex-col justify-between mb-4 mx-3">
                             <h3 class="text-lg font-semibold">{{ $course->course_name }}</h3>
                             <p class="text-sm text-gray-600">{{ $course->description }}</p>
-                            <p class="text-sm font-bold">${{ $course->price }}</p>
+                            <p class="text-sm font-bold">${{ $course->Price() }}</p>
                         </div>
                     </div>
                 </div>

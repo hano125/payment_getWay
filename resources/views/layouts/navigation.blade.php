@@ -21,7 +21,7 @@
 
 
                     <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
-                        {{ __('Cart') }}
+                        {{ __('Cart') }} ({{ \App\Models\Cart::where('session_id', session()->getId())->count() }})
                     </x-nav-link>
                 </div>
             </div>
