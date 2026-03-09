@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Course;
@@ -8,8 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 Route::get('/', function () {
-    $courses = Course::all();
+    $courses = Course::paginate(9);
     return view('welcome', get_defined_vars());
 })->name('home');
 
@@ -20,6 +22,11 @@ Route::controller(CourseController::class)->group(function () {
 Route::controller(CartController::class)->group(function () {
     Route::get('cart', 'index')->name('cart.index');
     Route::get("add-to-cart/{course:slug}", "addToCart")->name("addToCart");
+    Route::get("remove-from-cart/{course:slug}", "removeFromCart")->name("removeFromCart");
+});
+
+Route::controller(CheckOutController::class)->group(function () {
+    Route::get('checkout', 'index')->name('checkout.index');
 });
 
 Route::get('/dashboard', function () {
