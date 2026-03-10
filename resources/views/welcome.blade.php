@@ -23,9 +23,15 @@
 
                                     <div class="mt-auto d-flex align-items-center justify-content-between">
                                         <p class="fw-bold fs-5 mb-0">${{ $course->price }}</p>
+                                        @if($cart && $cart->courses->contains($course))
+                                        <a href="{{ route("removeFromCart", $course) }}"
+                                            class="btn btn-danger btn-sm px-3">Remove from
+                                            Cart</a>
+                                        @else
                                         <a href="{{ route("addToCart", $course) }}"
                                             class="btn btn-primary btn-sm px-3">Add to
                                             Cart</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
