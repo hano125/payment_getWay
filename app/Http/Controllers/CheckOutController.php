@@ -11,6 +11,12 @@ class CheckOutController extends Controller
     {
         $cart = Cart::Session()->first();
         $price = $cart->courses->pluck("stripe_price_id")->toArray();
-        return Auth::user()->checkout($price);
+        $session_options = [
+            "success_url" => route("home", ["message" => "Payment successful", "status" => "success"]),
+            "cancel_url" => route("home", ["message" => "Payment cancelled", "status" => "error"]),
+            //"billing_address_collection" => "required", //add billing address information into stripe checkout page
+            //"phone_number_collection" => ["enabled" => true], //add phone number information into stripe checkout page
+        ];
+        return Auth::user()->checkout($price, $session_options);
     }
 }

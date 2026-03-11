@@ -10,6 +10,12 @@
         <div class="container">
             {{-- <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body p-4 p-md-5"> --}}
+                    @if(request("message"))
+                    <div class="alert {{ request('status') === 'success' ? 'alert-success' : 'alert-danger' }} alert-dismissible fade show" role="alert">
+                        {{ request("message") }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <div class="row g-4">
                         @foreach ($courses as $course)
                         <div class="col-12 col-md-6 col-xl-4">
@@ -23,7 +29,7 @@
 
                                     <div class="mt-auto d-flex align-items-center justify-content-between">
                                         <p class="fw-bold fs-5 mb-0">${{ $course->price }}</p>
-                                        @if($cart && $cart->courses->contains($course))
+                                        @if(($cart ?? null) && $cart->courses->contains($course))
                                         <a href="{{ route("removeFromCart", $course) }}"
                                             class="btn btn-danger btn-sm px-3">Remove from
                                             Cart</a>
