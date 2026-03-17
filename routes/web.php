@@ -28,6 +28,8 @@ Route::controller(CartController::class)->group(function () {
 
 Route::controller(CheckOutController::class)->middleware('auth')->group(function () {
     Route::get('checkout', 'index')->name('checkout.index');
+    Route::get('checkoutCupon', 'index1')->name('checkoutCupon.index');
+
     Route::get('checkout/success', 'success')->name('checkout-success');
     Route::get('checkout/cancel', 'cancel')->name('checkout-cancel');
 });
