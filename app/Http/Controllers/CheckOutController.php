@@ -43,8 +43,9 @@ class CheckOutController extends Controller
         $order = Order::create([
             "user_id" => $session->metadata->user_id,
         ]);
-        $order->course()->attach($cart->courses->pluck('id')->toArray());
 
+        $order->course()->attach($cart->courses->pluck('id')->toArray());
+        $cart->delete();
         return to_route('home')->with('message', 'Payment successful! Your courses have been added to your account.', "status", "success");
     }
 

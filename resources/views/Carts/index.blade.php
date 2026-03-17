@@ -10,7 +10,7 @@
             <div class="col-md-8">
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-body">
-                        @if($cart && $cart->cartEmpty())
+                        @if(!$cart || $cart->cartEmpty())
                         <div class="alert alert-info text-center mb-0">
                             <i class="bi bi-cart-x fs-3"></i>
                             <p class="mb-0">Your cart is empty.</p>
