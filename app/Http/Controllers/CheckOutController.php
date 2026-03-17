@@ -49,6 +49,39 @@ class CheckOutController extends Controller
         return Auth::user()->allowPromotionCodes()->checkout($price, $sessionOptions, $customerOptions);
     }
 
+    public function checkoutNoneStripeProduct()
+    {
+        $cart = Cart::Session()->first();
+        // $price = $cart->courses->pluck("stripe_price_id")->toArray();
+        $sessionOptions = [
+            'success_url' => route('home', ["message" => "Payment successful! Your courses have been added to your account.", "status" => "success"]),
+            "cancel_url" => route('home', ["message" => "Payment was cancelled.", "status" => "error"]),
+            // "allow_promotion_codes" => true, //enable stripe promotion code
+            "metadata" => [
+                "user_id" => Auth::id(),
+                "cart_id" => $cart->id,
+            ],
+        ];
+
+        $customerOptions = [
+            "email" => Auth::user()->email,
+        ];
+        $courseNames = $cart->courses->pluck("name")->filter()->join(", ");
+        $productName = "Course Purchase";
+
+        $cart->delete();
+
+        return Auth::user()->checkoutCharge(
+            $cart->courses->sum("price"),
+            $productName, //product name
+            1,
+            $sessionOptions,
+            $customerOptions,
+
+
+        );
+    }
+
     public function success(Request $request)
     {
         $session = $request->user()->stripe()->checkout->sessions->retrieve($request->get('session_id'));
@@ -70,6 +103,7 @@ class CheckOutController extends Controller
         ]);
 
         $order->course()->attach($cart->courses->pluck('id')->toArray());
+        $cart->courses()->detach(); // Remove all course associations first
         $cart->delete();
         return to_route('home', [
             'message' => 'Payment successful! Your courses have been added to your account.',

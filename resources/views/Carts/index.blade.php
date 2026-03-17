@@ -36,7 +36,8 @@
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
                             <div class="fw-bold fs-5 text-dark">Total: {{ $cart->Total() }}</div>
-                            <a href="{{route('checkoutCupon.index')}}" class="btn btn-primary btn-lg px-4 shadow-sm">
+                            <a href="{{route('checkoutNoneStripeProduct')}}"
+                                class="btn btn-primary btn-lg px-4 shadow-sm">
                                 <i class="bi bi-credit-card-2-front me-2"></i> Checkout
                             </a>
                         </div>
